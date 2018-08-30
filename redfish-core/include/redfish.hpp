@@ -26,6 +26,7 @@
 #include "../lib/systems.hpp"
 #include "../lib/thermal.hpp"
 #include "../lib/update_service.hpp"
+#include "../lib/eventservice.hpp"
 #include "webserver_common.hpp"
 
 namespace redfish {
@@ -61,7 +62,8 @@ class RedfishService {
     nodes.emplace_back(std::make_unique<SoftwareInventory>(app));
     nodes.emplace_back(std::make_unique<VlanNetworkInterfaceCollection>(app));
     nodes.emplace_back(std::make_unique<SystemsCollection>(app));
-    nodes.emplace_back(std::make_unique<Systems>(app));
+    nodes.emplace_back(std::make_unique<Systems>(app));    
+    nodes.emplace_back(std::make_unique<EventService>(app));
 
     for (auto& node : nodes) {
       node->getSubRoutes(nodes);

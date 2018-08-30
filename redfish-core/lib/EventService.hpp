@@ -19,25 +19,23 @@
 
 namespace redfish {
 
-class AccountService : public Node {
+class EventService : public Node {
  public:
-  AccountService(CrowApp& app) : Node(app, "/redfish/v1/AccountService/") {
-    Node::json["@odata.id"] = "/redfish/v1/AccountService";
-    Node::json["@odata.type"] = "#AccountService.v1_1_0.AccountService";
+  EventService(CrowApp& app) : Node(app, "/redfish/v1/EventService/") {
+    Node::json["@odata.id"] = "/redfish/v1/EventService";
+    Node::json["@odata.type"] = "#EventService.v1_0_3.EventService";
     Node::json["@odata.context"] =
-        "/redfish/v1/$metadata#AccountService.AccountService";
-    Node::json["Id"] = "AccountService";
-    Node::json["Description"] = "BMC User Accounts";
-    Node::json["Name"] = "Account Service";
-    Node::json["ServiceEnabled"] = true;
-    Node::json["MinPasswordLength"] = 1;
-    Node::json["MaxPasswordLength"] = 20;
-    Node::json["Accounts"]["@odata.id"] = "/redfish/v1/AccountService/Accounts";
-    Node::json["Roles"]["@odata.id"] = "/redfish/v1/AccountService/Roles";
+        "/redfish/v1/$metadata#EventService.EventService";        
+    Node::json["Id"] = "EventService";
+    Node::json["Description"] = "Event Service";
+    Node::json["Name"] = "Event Service";
+    Node::json["ServiceEnabled"] = true;    
+    Node::json["Status"]["Health"] = "OK";
+    Node::json["Status"]["State"] = "Enabled";    
+    Node::json["Subscriptions"]["@odata.id"] = "/redfish/v1/EventService/Subscriptions";   
 
     entityPrivileges = {
-        {boost::beast::http::verb::get,
-         {{"ConfigureUsers"}, {"ConfigureManager"}}},
+        {boost::beast::http::verb::get, {{"Login"}}},
         {boost::beast::http::verb::head, {{"Login"}}},
         {boost::beast::http::verb::patch, {{"ConfigureUsers"}}},
         {boost::beast::http::verb::put, {{"ConfigureUsers"}}},
