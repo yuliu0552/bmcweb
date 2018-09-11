@@ -470,7 +470,7 @@ class SystemsCollection : public Node {
     Node::json["@odata.context"] =
         "/redfish/v1/"
         "$metadata#ComputerSystemCollection.ComputerSystemCollection";
-    Node::json["Name"] = "Computer System Collection";
+    Node::json["Name"] = "TTT Computer System Collection";
 
     entityPrivileges = {
         {boost::beast::http::verb::get, {{"Login"}}},
